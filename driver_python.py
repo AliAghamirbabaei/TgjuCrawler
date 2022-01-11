@@ -6,9 +6,9 @@ import sqlite3
 option = webdriver.ChromeOptions()
 option.add_argument("--headless")
 option.add_argument("hide_console")
-driver = webdriver.Chrome(executable_path="/Users/aliaghamirbabaei/Documents/WorkSpace/Python/WebCrowler/chromedriver", options=option)
+driver = webdriver.Chrome(executable_path="chromedriver Path", options=option)
 driver.get("https://www.tgju.org/profile/geram18/history")
-connection = sqlite3.connect("/Users/aliaghamirbabaei/Documents/WorkSpace/Python/WebCrowler/project.db")
+connection = sqlite3.connect("project.db Path")
 c = connection.cursor()
 c.execute("PRAGMA table_info(driver)")
 data = (c.fetchall())
@@ -16,14 +16,6 @@ data = (c.fetchall())
 if len(data[0][1]) != 1:
         for i in range(0, 8):
                 c.execute(f'''ALTER TABLE driver RENAME COLUMN '{data[i][1]}'  TO "{i + 1}"''')
-
-def get_page_count(driver):
-        element = driver.find_element_by_xpath(
-                "/html/body/main/div[1]/div[2]/div/div[1]/div/div[3]/div/table/tbody/tr[25]/td[1]")
-        driver.execute_script('arguments[0].scrollIntoView(true);', element)
-        element = driver.find_element_by_xpath('//*[@id="DataTables_Table_0_next"]')
-        print(element)
-
 
 def site(driver):
         li = []
@@ -71,7 +63,6 @@ def site(driver):
                                 f"/html/body/main/div[1]/div[2]/div/div[1]/div/div[3]/div/table/tbody/tr[{k}]/td[1]")
                         driver.execute_script('arguments[0].scrollIntoView(true);', element)
                         time.sleep(5)
-
         return li
 
 
@@ -86,13 +77,13 @@ def scroll_click(driver):
 
 
 def save(var):
-        connection = sqlite3.connect("/Users/aliaghamirbabaei/Documents/WorkSpace/Python/WebCrowler/project.db")
+        connection = sqlite3.connect("project.db Path")
         c = connection.cursor()
 
         for i in range(0, len(var)):
                 sqlite_insert_query = f"""INSERT INTO driver
                                   ('1','2','3','4','5','6','7','8')
-                                   VALUES 
+                                   VALUES
                                    ('{var[i][0]}','{var[i][1]}','{var[i][2]}','{var[i][3]}','{var[i][4]}','{var[i][5]}',
                                    '{var[i][6]}','{var[i][7]}')"""
 
@@ -101,15 +92,13 @@ def save(var):
         connection.commit()
         connection.close()
 
-
-for i in range(1, 84):
+for i in range(1, 85):
         var = site(driver)
         scroll_click(driver)
         save(var)
-        # get_page_count(driver)
 
 
-connection = sqlite3.connect("/Users/aliaghamirbabaei/Documents/WorkSpace/Python/WebCrowler/project.db")
+connection = sqlite3.connect("project.db Path")
 c = connection.cursor()
 
 c.execute(f'''ALTER TABLE driver RENAME COLUMN '1'  TO بازگشايي''')
@@ -121,5 +110,3 @@ c.execute(f'''ALTER TABLE driver RENAME COLUMN '6'  TO "درصد تغيير"''')
 c.execute(f'''ALTER TABLE driver RENAME COLUMN '7'  TO "تاريخ/ميلادي"''')
 c.execute(f'''ALTER TABLE driver RENAME COLUMN '8'  TO "تاريخ/شمسي" ''')
 connection.close()
-
-
