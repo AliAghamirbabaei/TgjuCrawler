@@ -7,3 +7,5 @@ Simple crawler bot for Tgju prices.
 2- Add driver path 
 
 3- Add project.db path
+
+note: code was not written by me, should be refactor. but if you hava any quastins feel free to contact with [email](mailto:Me@AliAghamirbabaei.com)
