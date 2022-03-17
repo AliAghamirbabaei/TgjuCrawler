@@ -8,4 +8,4 @@ Simple crawler bot for Tgju prices.
 
 3- Add project.db path
 
-note: code was not written by me, should be refactor. but if you hava any quastins feel free to contact with [email](mailto:Me@AliAghamirbabaei.com)
+note: code was not written by me, should be refactor. but if you hava any quastins feel free to contact with my [email](mailto:Me@AliAghamirbabaei.com)
